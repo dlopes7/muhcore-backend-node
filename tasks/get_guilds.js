@@ -7,12 +7,6 @@ mongoose.connect('mongodb://localhost/BnetBackend');
 
 const blizzard = require('blizzard.js').initialize({ apikey: 'nm3jrgp8avwjpqnptby38z763t9afyes' });
 
-//blizzard.wow.character(['profile'], { origin: 'us', realm: 'amanthul', name: 'charni' })
-//  .then(response => {
-//   console.log(response.data);
-//  });
-  
- 
 blizzard.wow.guild(['members'], { origin: 'us', realm: 'azralon', name: 'Defiant'})
 	.then(response => {
 		console.log(response.data);
