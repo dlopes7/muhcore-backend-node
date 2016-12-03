@@ -5,9 +5,8 @@ var GuildSchema = new mongoose.Schema({
 		type: String,
 		index: true,
 	},
-	members: {
+	achievements: {
 		type: Number,
-		
 	}
 });
 

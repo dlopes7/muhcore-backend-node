@@ -1,15 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost');
+var guilds = require('./routes/guild')
+
+mongoose.connect('mongodb://localhost/BnetBackend');
 
 
 var app = express();
-
-app.get('/guilds', function(req, res){
-	res.send([{name: 'guild1'}, {name: 'guild2'} ]);
-
-});
+app.use('/guilds', guilds)
 
 
 app.listen(3000);
