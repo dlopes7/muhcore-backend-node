@@ -2,12 +2,14 @@
 var mongoose = require('mongoose');
 var Guild = require('../models/guild').Guild;
 
+var config = require('../config');
+
 mongoose.connect('mongodb://localhost/BnetBackend');
 
 
-const blizzard = require('blizzard.js').initialize({ apikey: 'nm3jrgp8avwjpqnptby38z763t9afyes' });
+const blizzard = require('blizzard.js').initialize({ apikey: config.bnet.secret });
 
-blizzard.wow.guild(['members'], { origin: 'us', realm: 'azralon', name: 'Defiant'})
+blizzard.wow.guild(['members'], { origin: 'us', realm: 'azralon', name: 'BURN'})
 	.then(response => {
 		console.log(response.data);
 		var guild = new Guild({
