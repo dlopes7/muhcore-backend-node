@@ -17,7 +17,7 @@ blizzard.wow.guild(['members'], { origin: 'us', realm: 'azralon', name: 'Defiant
 			
 		console.log(guild);
 			
-		guild.save(function(err){
+		guild.save(function(err, guild){
 
 			if (err) {
 				console.log('Error: ' + err);
