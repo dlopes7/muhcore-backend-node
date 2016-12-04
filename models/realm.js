@@ -1,16 +1,14 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
 
 var RealmSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		index: true,
-	},
-	guilds : [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Guild'
-	}]
-
+		index: {unique: true},		
+	}
 });
+
+RealmSchema.plugin(findOrCreate);
 
 var Realm = mongoose.model('Realm', RealmSchema);
 
