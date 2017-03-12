@@ -2,18 +2,31 @@
 var mongoose = require('mongoose');
 var Guild = require('../models/guild').Guild;
 var Realm = require('../models/realm').Realm;
+var Class = require('../models/class').Class;
+var Spec = require('../models/spec').Spec;
 
 var config = require('../config');
 
-mongoose.connect('mongodb://localhost/BnetBackend');
+mongoose.connect('mongodb://mongodb/BnetBackend');
 
-
+const Promise = require('bluebird');
 const blizzard = require('blizzard.js').initialize({ apikey: config.bnet.secret });
 
 
 var realm_data ={
 	name: 'Azralon'
 };
+
+
+createRealms = function (){
+	blizzard.wow.realm()
+	.then(response => {
+		console.log(response);
+	});
+
+	
+}
+
 
 //First step, retrieve or create the realm.
 Realm.findOrCreate(realm_data, function(err, realm, created){
@@ -27,7 +40,7 @@ Realm.findOrCreate(realm_data, function(err, realm, created){
 			}
 			
 			//If the Realm is created or retrieved, do the same with the guild.
-			blizzard.wow.guild(['members'], { origin: 'eu', realm: realm.name, name: 'Defiant'})
+			blizzard.wow.guild(['members'], { origin: 'us', realm: realm.name, name: 'Defiant'})
 			.then(response => {
 				//console.log(response.data);
 				var guild_data = {
@@ -51,8 +64,11 @@ Realm.findOrCreate(realm_data, function(err, realm, created){
 					
 					// Now for each character in the guild.
 					for (var i = 0; i < response.data['members'].length; i++) { 
-						var member = response.data['members'][i];
-						console.log(member);
+						var member = response.data['members'][i]['character'];
+						var char_data = {
+							name: member['name']
+						};
+						console.log(member, char_data);
 						
 					}
 		

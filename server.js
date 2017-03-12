@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var guilds = require('./routes/guild')
 
-mongoose.connect('mongodb://localhost/BnetBackend');
+mongoose.connect('mongodb://mongodb/BnetBackend');
 
 
 var app = express();

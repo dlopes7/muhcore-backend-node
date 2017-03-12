@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mongodb:
+    image: mongo
+    expose:
+      - '27017'
+  muhcore_backend:
+    build: .
+    volumes:
+      - .:/home/app/muhcore
+      - /home/app/muhcore/node_modules
+    ports:
+      - "8080:3000"
+    expose:
+      - "8080"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongo
